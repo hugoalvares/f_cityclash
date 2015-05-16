@@ -18,12 +18,8 @@ var rodaSql = function(sql, callback) {
 	});
 }
 
-var test = function () {
-	return '111';
-};
-
 module.exports = {
-    test: function () {
-	    return test();
+    rodaSql: function (sql, callback) {
+	    return rodaSql(sql, callback);
     }
 };

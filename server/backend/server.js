@@ -4,21 +4,28 @@ var express = require('express')
   , app = express()
   , db = require('./database.js');
 
-console.log(db.test());
-
 // libera acesso para o localhost
 app.use(cors());
 
 // webservice
 app.get('/', function(req, res, next){
-	console.log(req.query.string);
+	console.log('webservice chamado');
 	var response = {
 		string : req.query.string
 	};
 	res.send(response);
 });
 
+function buscaOrganizacoes(nome) {
+	db.rodaSql('select * from organizacao', function(organizacoes){
+		console.log(organizacoes);		
+	});
+};
+
+// porta em que vai iniciar o servidor
+var porta = 80;
+
 // iniciando o servidor
-app.listen(9091, function(){
-	console.log('webservice rodando na porta 9091');
+app.listen(porta, function(){
+	console.log('webservice rodando na porta ' + porta);
 });

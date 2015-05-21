@@ -1,14 +1,25 @@
 package com.lovesoft.cityclash;
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -21,17 +32,10 @@ public class MainActivity extends ActionBarActivity {
         final Button button = (Button) findViewById(R.id.btnChamaServidor);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
-                    Server.chamaServidor();
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                new HttpAsyncTask().execute("http://192.168.43.62");
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -53,5 +57,44 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public static String GET(String url){
+        String result = "";
+        try {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
+            InputStream inputStream = httpResponse.getEntity().getContent();
+            result = convertInputStreamToString(inputStream);
+        } catch (Exception e) {
+            Log.d("InputStream", e.getLocalizedMessage());
+        }
+        return result;
+    }
+
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        String line = "";
+        String result = "";
+        while((line = bufferedReader.readLine()) != null) {
+            result += line;
+        }
+        inputStream.close();
+        return result;
+    }
+
+    public class HttpAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            return GET(urls[0]);
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                Ponte.trataRetorno(new JSONObject(result));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -6,9 +6,9 @@ module.exports = {
 			callback(organizacoes);
 		});
 	},
-	criaOrganizacao : function(callback) {
-		db.rodaSql('insert into organizacao (nome) values ('+ nome +')', function(organizacoes){
-			callback(organizacoes);
+	cadastraOrganizacao : function(nome, callback) {
+		db.rodaSql('insert into organizacao (nome) values ('+ nome +')', function(){
+			callback();
 		});
 	}
 };

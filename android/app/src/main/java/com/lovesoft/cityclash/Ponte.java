@@ -15,8 +15,14 @@ public class Ponte {
         try {
             String funcao = retorno.getString("funcao");
             JSONArray dados = retorno.getJSONArray("data");
+
+            // escrever funções abaixo
             if (funcao == "buscaOrganizacoes") {
                 buscaOrganizacoes(dados);
+            } else if (funcao == "cadastraOrganizacao") {
+                cadastraOrganizacao();
+            } else if (funcao == "creditaGestor") {
+                creditaGestor();
             }
         } catch (JSONException e) {
             Log.i("debugger", "dado não encontrado");
@@ -29,6 +35,14 @@ public class Ponte {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void cadastraOrganizacao() {
+        // deu certo
+    }
+
+    private static void creditaGestor() {
+        // deu certo
     }
 
 }

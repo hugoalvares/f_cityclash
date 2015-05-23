@@ -16,13 +16,29 @@ app.use(cors());
 
 // webservice
 app.get('/', function(req, res, next){
-	console.log('webservice chamado');
-	regrasOrganizacao.buscaOrganizacoes(function(dados){
-		montaRetorno('buscaOrganizacoes', dados, function(retorno){
-			console.log(retorno);
-			res.send(retorno);
+	if (req.query.funcao == 'cadastraOrganizacao') {
+		console.log('entrei aqui');
+		regrasOrganizacao.cadastraOrganizacao(req.dados.nome, function(){
+			montaRetorno(req.funcao, null, function(retorno){
+				console.log(retorno);
+				res.send(retorno);
+			});
 		});
-	});
+	} else if (req.query.funcao == 'cadastraGestor') {
+		regrasOrganizacao.cadastraGestor(req.dados.nome, req.dados.email, req.dados.senha, function(){
+			montaRetorno(req.funcao, null, function(retorno){
+				console.log(retorno);
+				res.send(retorno);
+			});
+		});
+	} else if (req.query.funcao == 'cadastraGestor') {
+		regrasOrganizacao.buscaOrganizacoes(function(dados){
+			montaRetorno('buscaOrganizacoes', dados, function(retorno){
+				console.log(retorno);
+				res.send(retorno);
+			});
+		});
+	}
 });
 
 function montaRetorno(funcao, dados, callback) {

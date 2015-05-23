@@ -8,7 +8,7 @@ var fw = {
 
 	callServer : function(params) {
 		$.ajax({
-			url: "http://127.0.0.1:9091/",
+			url: "http://127.0.0.1/",
 			type: "GET",
 			dataType: "json",
 			data: params,

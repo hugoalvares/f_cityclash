@@ -1,0 +1,18 @@
+- gestor:
+cadastra gestor
+credita gestor
+debita gestor
+entra organizacao
+compra investimento
+vende investimento
+
+- organizacao:
+busca organizacoes
+cadastra organizacao
+
+- tiporeceita:
+cadastra tipo receita
+
+- investimento:
+cadastra investimento
+cadastra receita

@@ -63,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
         String result = "";
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
+            HttpResponse httpResponse = httpclient.execute(new HttpGet(url+"?funcao=cadastraOrganizacao"));
             InputStream inputStream = httpResponse.getEntity().getContent();
             result = convertInputStreamToString(inputStream);
         } catch (Exception e) {

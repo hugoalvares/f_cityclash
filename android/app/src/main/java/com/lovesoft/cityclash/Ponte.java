@@ -11,13 +11,24 @@ import org.json.JSONObject;
  */
 public class Ponte {
 
-    public static String trataRetorno(JSONObject dados) {
+    public static void trataRetorno(JSONObject retorno) {
         try {
-            JSONArray organizacoes = dados.getJSONArray("data");
-            Log.i("debugger", organizacoes.getJSONObject(0).getString("nome"));
+            String funcao = retorno.getString("funcao");
+            JSONArray dados = retorno.getJSONArray("data");
+            if (funcao == "buscaOrganizacoes") {
+                buscaOrganizacoes(dados);
+            }
         } catch (JSONException e) {
             Log.i("debugger", "dado não encontrado");
         }
-        return "ok";
     }
+
+    private static void buscaOrganizacoes(JSONArray dados) {
+        try {
+            Log.i("debugger", dados.getJSONObject(0).getString("nome"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

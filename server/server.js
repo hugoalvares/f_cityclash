@@ -2,7 +2,14 @@
 var express = require('express')
   , cors = require('cors')
   , app = express()
-  , db = require('./database.js');
+  , db = require('./database.js')
+  // regras
+  , regrasGestor = require('./regras/gestor.js')
+  , regrasGestorInvestimento = require('./regras/gestorInvestimento.js')
+  , regrasInvestimento = require('./regras/investimento.js')
+  , regrasOrganizacao = require('./regras/organizacao.js')
+  , regrasTipoReceita = require('./regras/tipoReceita.js')
+  , regrasTipoReceitaInvestimento = require('./regras/tipoReceitaInvestimento.js');
 
 // libera acesso para o localhost
 app.use(cors());
@@ -10,26 +17,20 @@ app.use(cors());
 // webservice
 app.get('/', function(req, res, next){
 	console.log('webservice chamado');
-	buscaOrganizacoes(function(organizacoes){
-		montaRetorno(organizacoes, function(retorno){
+	regrasOrganizacao.buscaOrganizacoes(function(dados){
+		montaRetorno('buscaOrganizacoes', dados, function(retorno){
+			console.log(retorno);
 			res.send(retorno);
 		});
 	});
 });
 
-function montaRetorno(dados, callback) {
+function montaRetorno(funcao, dados, callback) {
 	var retorno = {
+		funcao : funcao,
 		data : dados
 	};
-	console.log('retorno:');
-	console.log(retorno);
 	callback(retorno);
-};
-
-function buscaOrganizacoes(callback) {
-	db.rodaSql('select * from organizacao', function(organizacoes){
-		callback(organizacoes);
-	});
 };
 
 // porta em que vai iniciar o servidor

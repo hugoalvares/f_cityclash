@@ -1,5 +1,6 @@
 // uses
 var express = require('express')
+  , bodyParser = require('body-parser')
   , cors = require('cors')
   , app = express()
   , db = require('./database.js')
@@ -14,28 +15,33 @@ var express = require('express')
 // libera acesso para o localhost
 app.use(cors());
 
-// webservice
-app.get('/', function(req, res, next){
-	if (req.query.funcao == 'cadastraOrganizacao') {
-		console.log('entrei aqui');
-		regrasOrganizacao.cadastraOrganizacao(req.dados.nome, function(){
-			montaRetorno(req.funcao, null, function(retorno){
+// define que usa o formato application/json
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
+// função chamada pelo Android (webservice)
+app.post('/', function(request, response){
+	console.log(request.body);
+  	//response.send(request.body); // echo the result back
+	if (request.query.funcao == 'cadastraOrganizacao') {
+		regrasOrganizacao.cadastraOrganizacao(request.dados.nome, function(){
+			montaRetorno(request.funcao, null, function(retorno){
 				console.log(retorno);
-				res.send(retorno);
+				response.send(retorno);
 			});
 		});
-	} else if (req.query.funcao == 'cadastraGestor') {
-		regrasOrganizacao.cadastraGestor(req.dados.nome, req.dados.email, req.dados.senha, function(){
-			montaRetorno(req.funcao, null, function(retorno){
+	} else if (request.query.funcao == 'cadastraGestor') {
+		regrasOrganizacao.cadastraGestor(request.dados.nome, request.dados.email, request.dados.senha, function(){
+			montaRetorno(request.funcao, null, function(retorno){
 				console.log(retorno);
-				res.send(retorno);
+				response.send(retorno);
 			});
 		});
-	} else if (req.query.funcao == 'cadastraGestor') {
+	} else if (request.query.funcao == 'cadastraGestor') {
 		regrasOrganizacao.buscaOrganizacoes(function(dados){
 			montaRetorno('buscaOrganizacoes', dados, function(retorno){
 				console.log(retorno);
-				res.send(retorno);
+				response.send(retorno);
 			});
 		});
 	}

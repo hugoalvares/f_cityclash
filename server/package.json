@@ -1,6 +1,6 @@
 {
-  "name": "hotel",
-  "description": "hotel backend",
+  "name": "CityClash",
+  "description": "the best game ever",
   "version": "0.0.1",
   "private": true,
   "dependencies": {

@@ -22,7 +22,8 @@ app.use(bodyParser.json());
 // função chamada pelo Android (webservice)
 app.post('/', function(request, response){
 	console.log(request.body);
-  	//response.send(request.body); // echo the result back
+	response.send(request.body);
+	/*
 	if (request.query.funcao == 'cadastraOrganizacao') {
 		regrasOrganizacao.cadastraOrganizacao(request.dados.nome, function(){
 			montaRetorno(request.funcao, null, function(retorno){
@@ -45,6 +46,7 @@ app.post('/', function(request, response){
 			});
 		});
 	}
+	*/
 });
 
 function montaRetorno(funcao, dados, callback) {

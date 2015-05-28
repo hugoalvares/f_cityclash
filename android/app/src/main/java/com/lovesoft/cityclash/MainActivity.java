@@ -1,6 +1,7 @@
 package com.lovesoft.cityclash;
 
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +12,11 @@ import android.widget.Button;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,9 +37,16 @@ public class MainActivity extends ActionBarActivity {
         final Button button = (Button) findViewById(R.id.btnChamaServidor);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                new HttpAsyncTask().execute("http://192.168.43.62");
+                JSONObject joParams = new JSONObject();
+                try {
+                    joParams.put("test", true);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                serverRequest("http://10.100.10.58", joParams);
             }
         });
+
     }
 
     @Override
@@ -59,17 +71,30 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static String GET(String url){
-        String result = "";
+    private static String serverRequest(String stUrl, JSONObject joParams){
+        String stReturn = "";
         try {
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpResponse httpResponse = httpclient.execute(new HttpGet(url+"?funcao=cadastraOrganizacao"));
+            // cria objeto de requisição
+            HttpClient httpClient = new DefaultHttpClient();
+            // cria objeto de método post
+            HttpPost httPost = new HttpPost(stUrl);
+            // transforma parâmetros em string
+            StringEntity stringEntity = new StringEntity(joParams.toString());
+            // seta os parâmetros no objeto método post
+            httPost.setEntity(stringEntity);
+            // define que a requisição é tipo application/json
+            httPost.setHeader("Accept", "application/json");
+            httPost.setHeader("Content-type", "application/json");
+            // executa a requisição
+            HttpResponse httpResponse = httpClient.execute(httPost);
+            // busca o retorno da requisição
             InputStream inputStream = httpResponse.getEntity().getContent();
-            result = convertInputStreamToString(inputStream);
+            // converte retorno da requisição para string e retorna
+            stReturn = convertInputStreamToString(inputStream);
         } catch (Exception e) {
-            Log.d("InputStream", e.getLocalizedMessage());
+            e.printStackTrace();
         }
-        return result;
+        return stReturn;
     }
 
     private static String convertInputStreamToString(InputStream inputStream) throws IOException {
@@ -83,18 +108,14 @@ public class MainActivity extends ActionBarActivity {
         return result;
     }
 
-    public class HttpAsyncTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-            return GET(urls[0]);
+    private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        public MyAsyncTask(boolean showLoading) {
+            super();
+            // do stuff
         }
-        @Override
-        protected void onPostExecute(String result) {
-            try {
-                Ponte.trataRetorno(new JSONObject(result));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+
+        // doInBackground() et al.
     }
+
 }

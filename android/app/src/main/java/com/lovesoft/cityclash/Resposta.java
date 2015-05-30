@@ -9,12 +9,12 @@ import org.json.JSONObject;
 /**
  * Created by Hugo on 20/05/2015.
  */
-public class Ponte {
+public class Resposta {
 
-    public static void trataRetorno(JSONObject retorno) {
+    public static void trataRetorno(JSONObject joRetorno) {
         try {
-            String funcao = retorno.getString("funcao");
-            JSONArray dados = retorno.getJSONArray("data");
+            String funcao = joRetorno.getString("funcao");
+            JSONArray dados = joRetorno.getJSONArray("data");
 
             // escrever funções abaixo
             if (funcao == "buscaOrganizacoes") {
@@ -23,8 +23,10 @@ public class Ponte {
                 cadastraOrganizacao();
             } else if (funcao == "creditaGestor") {
                 creditaGestor();
+            } else if (funcao == "login") {
+                login(dados);
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             Log.i("debugger", "dado não encontrado");
         }
     }
@@ -32,7 +34,7 @@ public class Ponte {
     private static void buscaOrganizacoes(JSONArray dados) {
         try {
             Log.i("debugger", dados.getJSONObject(0).getString("nome"));
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -43,6 +45,10 @@ public class Ponte {
 
     private static void creditaGestor() {
         // deu certo
+    }
+
+    private static void login() {
+
     }
 
 }

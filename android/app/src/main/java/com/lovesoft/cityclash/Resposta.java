@@ -26,6 +26,18 @@ public class Resposta {
             } else if (funcao == "login") {
                 login(dados);
             }
+            else if (funcao == "cadastrarGestor") {
+                cadastrarGestor();
+            }
+            else if (funcao == "debitaGestor") {
+                debitaGestor();
+            }
+
+            else if (funcao == "comprarInvestimento") {
+                comprarInvestimento();
+            }
+
+
         } catch (Exception e) {
             Log.i("debugger", "dado não encontrado");
         }
@@ -39,15 +51,25 @@ public class Resposta {
         }
     }
 
+    private static void comprarInvestimento() {
+        // deu certo
+    }
+
     private static void cadastraOrganizacao() {
         // deu certo
     }
 
+    private static void debitaGestor() {
+        // deu certo
+    }
+    private static void cadastrarGestor() {
+        // deu certo
+    }
     private static void creditaGestor() {
         // deu certo
     }
 
-    private static void login() {
+    private static void login(JSONArray dados) {
 
     }
 

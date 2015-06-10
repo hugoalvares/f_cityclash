@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtNome"
+        android:layout_x="48dp"
+        android:layout_y="66dp"
+        android:hint="Nome Organização" />
+
+    <EditText
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtCodigoDiretor"
+        android:layout_x="50dp"
+        android:layout_y="129dp"
+        android:hint="Codigo Diretor" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:id="@+id/btnSalvar"
+        android:layout_x="131dp"
+        android:layout_y="257dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Cadastrar Organização"
+        android:id="@+id/textView3"
+        android:layout_x="44dp"
+        android:layout_y="13dp" />
+
+</AbsoluteLayout>

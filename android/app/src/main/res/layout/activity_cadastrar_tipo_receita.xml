@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtTipoReceita"
+        android:layout_x="87dp"
+        android:layout_y="102dp"
+        android:hint="Nome Tipo de receita" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:id="@+id/btnSalvar"
+        android:layout_x="133dp"
+        android:layout_y="224dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Cadastrar tipo receita"
+        android:id="@+id/textView4"
+        android:layout_x="94dp"
+        android:layout_y="6dp" />
+</AbsoluteLayout>

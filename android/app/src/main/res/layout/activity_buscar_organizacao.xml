@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="249dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtNomeOrganizacao"
+        android:layout_x="69dp"
+        android:layout_y="110dp"
+        android:hint="Nome da organização" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buscar"
+        android:id="@+id/btnBuscarOrganizacao"
+        android:layout_x="133dp"
+        android:layout_y="234dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Buscar Organização"
+        android:id="@+id/textView2"
+        android:layout_x="87dp"
+        android:layout_y="11dp" />
+
+</AbsoluteLayout>

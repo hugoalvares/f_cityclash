@@ -21,6 +21,18 @@ public class Resposta {
             } else if (stFuncao.equals("cadastro")) {
                 cadastro();
             }
+            else if (funcao == "cadastrarGestor") {
+                cadastrarGestor();
+            }
+            else if (funcao == "debitaGestor") {
+                debitaGestor();
+            }
+
+            else if (funcao == "comprarInvestimento") {
+                comprarInvestimento();
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,12 +50,35 @@ public class Resposta {
         }
     }
 
+<<<<<<< HEAD
     private static void cadastro() {
         try {
             // cadastro realizado com sucesso
         } catch (Exception e) {
             e.printStackTrace();
         }
+=======
+    private static void comprarInvestimento() {
+        // deu certo
+    }
+
+    private static void cadastraOrganizacao() {
+        // deu certo
+    }
+
+    private static void debitaGestor() {
+        // deu certo
+    }
+    private static void cadastrarGestor() {
+        // deu certo
+    }
+    private static void creditaGestor() {
+        // deu certo
+    }
+
+    private static void login(JSONArray dados) {
+
+>>>>>>> 210d2f72fcb6c820383bc9987280001e5664e4ef
     }
 
 }

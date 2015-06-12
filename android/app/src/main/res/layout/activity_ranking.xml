@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <GridView
+        android:layout_width="wrap_content"
+        android:layout_height="259dp"
+        android:id="@+id/gridView2"
+        android:layout_x="0dp"
+        android:layout_y="95dp"
+        tools:listitem="@android:layout/simple_list_item_1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Raking TOP 5 da semana"
+        android:id="@+id/txtRaking"
+        android:layout_x="30dp"
+        android:layout_y="23dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detalhar Perfil"
+        android:id="@+id/btnDetalhar"
+        android:layout_x="110dp"
+        android:layout_y="402dp" />
+
+</AbsoluteLayout>

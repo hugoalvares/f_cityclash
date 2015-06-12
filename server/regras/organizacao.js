@@ -1,13 +1,13 @@
 var db = require('../database.js');
 
 module.exports = {
-	buscaOrganizacoes : function(callback) {
-		db.rodaSql('select * from organizacao', function(organizacoes){
+	buscaOrganizacoes : function(nome, callback) {
+		db.rodaSql('select * from organizacao where nome =' + nome, function(organizacoes){
 			callback(organizacoes);
 		});
 	},
-	cadastraOrganizacao : function(nome, callback) {
-		db.rodaSql('insert into organizacao (nome) values ('+ nome +')', function(){
+	cadastraOrganizacao : function(nome, diretor, callback) {
+		db.rodaSql('insert into organizacao (nome, diretor) values ('+ nome +','+ diretor +')', function(){
 			callback();
 		});
 	}

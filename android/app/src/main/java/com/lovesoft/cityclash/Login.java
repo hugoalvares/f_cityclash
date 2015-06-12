@@ -52,8 +52,14 @@ public class Login extends ActionBarActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
+<<<<<<< HEAD
                     Intent intent = new Intent(Login.this, Cadastro.class);
                     startActivity(intent);
+=======
+                    // abre a tela de login
+                   // Intent intent = new Intent(this, Cadastro.class);
+                   // startActivity(intent);
+>>>>>>> 210d2f72fcb6c820383bc9987280001e5664e4ef
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

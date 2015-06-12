@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Buscar Investimento"
+        android:id="@+id/textView9"
+        android:layout_x="75dp"
+        android:layout_y="6dp" />
+
+    <EditText
+        android:layout_width="249dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_x="63dp"
+        android:layout_y="178dp"
+        android:hint="Valor para a busca" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buscar"
+        android:id="@+id/btnBuscar"
+        android:layout_x="42dp"
+        android:layout_y="431dp" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categoria"
+        android:id="@+id/rbCategoria"
+        android:layout_x="116dp"
+        android:layout_y="71dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Buscar Por :"
+        android:id="@+id/txtBuscarPor"
+        android:layout_x="21dp"
+        android:layout_y="81dp" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome"
+        android:id="@+id/rdNome"
+        android:layout_x="116dp"
+        android:layout_y="102dp" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Custo"
+        android:id="@+id/rbCusto"
+        android:layout_x="121dp"
+        android:layout_y="135dp" />
+
+    <GridView
+        android:layout_width="258dp"
+        android:layout_height="162dp"
+        android:id="@+id/gridView"
+        android:layout_x="38dp"
+        android:layout_y="249dp"
+        tools:listitem="@android:layout/simple_list_item_1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detalhar"
+        android:id="@+id/btnDetalhe"
+        android:layout_x="189dp"
+        android:layout_y="429dp" />
+
+</AbsoluteLayout>

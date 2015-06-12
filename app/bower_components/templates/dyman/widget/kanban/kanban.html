@@ -1,0 +1,15 @@
+<section class="zh-widget" data-zh-widget-events>
+  <div class="container zh-kanban-container"
+       data-ng-controller="KanbanController as controller"
+       data-zh-scroller>
+    <div class="zh-kanban-column-container">
+      <div class="kanban-column" column-id="{{ column.id }}"
+           data-ng-repeat="column in widget.dataSource.data">
+        <span class="kanban-column-label" data-ng-bind="column.label"></span>
+        <ul ui-sortable="sortableOptions" class="kanban-item-container" ng-model="column.items">
+          <li class="kanban-item" data-ng-repeat="item in column.items" data-ng-include="templateManager.getTemplateDefaultFolder()+widget.itemTemplate" data-zh-style="item"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

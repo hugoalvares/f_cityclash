@@ -1,0 +1,10 @@
+<form role="form"  class="widget-{{widget.name}} pull-left" zh-center-top zh-widget-events>
+    <div
+            class="form-group col-xs-{{field.class}}"
+            ng-repeat="field in widget.fields"
+            ng-include src="templateManager.getTemplateDefaultFolder()+field.template"
+            class="field_{{field.name}}" ng-show="field.isVisible"
+            zh-post-repeat="templateManager.container.refresh()"
+            >
+    </div>
+</form>

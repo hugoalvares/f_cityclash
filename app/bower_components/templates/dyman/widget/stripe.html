@@ -1,0 +1,59 @@
+<aside class="container zh-stripe zh-stripe-bgcolor" zh-widget-events>
+	<form role="form" class="zh-{{widget.name}} zh-nopadding-container row-fluid" ng-controller="FormController">
+		<div class="form-group col-xs-12 zh-stripe-fields">
+			<!-- Field groups -->
+			<section class="zh-field-group"
+				ng-repeat="fieldGroup in widget.fieldGroups"
+				data-ng-if="fieldGroup.rows.length > 0">
+
+				<!-- Field group label -->
+        <label ng-click="fieldGroup.opened = !fieldGroup.opened">
+        	<span class="zh-label zh-field-group-label"
+	        	ng-bind="fieldGroup.label"
+	        	ng-class="{ 'opened' : fieldGroup.opened && fieldGroup.collapsible, 'closed' : !fieldGroup.opened && fieldGroup.collapsible }"></span>
+        </label>
+
+				<!-- Field group rows -->
+				<div class="field-group-rows"
+			      	ng-show="fieldGroup.opened">
+
+						<div class="row"
+							data-ng-repeat="row in fieldGroup.rows"
+							data-ng-show="widget.isVisible || true"
+							data-ng-if="widget.aclIsVisible">
+
+							<div
+								class="col-xs-{{field.class}} zh-field"
+								data-ng-repeat="field in row.fields"
+								data-ng-include src="templateManager.getTemplateDefaultFolder()+field.template"
+								data-ng-show="field.isVisible && field.showOnForm"
+								data-ng-if="field.aclIsVisible"
+								zh-post-repeat="templateManager.container.refresh()"
+							></div>
+
+				  	</div>
+
+		      	</div>
+			</section>
+		</div>
+	</form>
+</aside>
+
+<!-- <aside class="container zh-stripe zh-stripe-bgcolor">
+	<header>
+		<form role="form" class="zh-{{widget.name}} row row-fluid" zh-widget-events ng-controller="FormController">
+			<div class="form-group">
+				<div class="row row-fluid" ng-repeat="row in rows">
+					<div
+						class="col-xs-{{field.class}} zh-field"
+						ng-repeat="field in row.fields"
+						ng-include src="templateManager.getTemplateDefaultFolder()+field.template"
+						ng-show="field.showOnForm"
+						zh-post-repeat="templateManager.container.refresh()"
+						>
+				  	</div>
+			  	</div>
+			</div>
+		</form>
+	</header>
+</aside> -->

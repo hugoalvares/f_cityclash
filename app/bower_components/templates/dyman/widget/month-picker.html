@@ -1,0 +1,29 @@
+<div class="container"
+	zh-widget-events
+	zh-scroller>
+	<section class="calendar month-picker" zh-month-picker>
+	  <!-- Navigation controls -->
+	  <nav>
+	    <div class="year-nav">
+	      <button class="prev" zh-touchstart="navigateDate(-1)"> &lt; </button>
+	      <span class="year"   ng-bind="currentYear"></span>
+	      <button	class="next" zh-touchstart="navigateDate(1)"> &gt; </button>
+	    </div>
+	  </nav>
+
+	  <!-- Calendar -->
+	  <table class="calendar-days">
+	    <tbody class="month-days">
+	      <tr ng-repeat="monthRow in monthRows">
+	        <td
+	          ng-repeat="month in monthRow.months"
+	          month="{{month.number}}"
+	          ng-bind="month.name"
+	          ng-class="{ 'selected': day.selected }"
+	          zh-touchstart="monthClick(month)"
+	        ></td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</section>
+</div>

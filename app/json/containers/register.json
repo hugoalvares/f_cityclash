@@ -1,0 +1,109 @@
+{
+    "id": 1,
+    "name": "register",
+    "showHeader": false,
+    "label": "register",
+    "showBack": false,
+    "events": [],
+    "showFooter": true,
+    "footer": "component/footer.html",
+    "template": "container/window.html",
+    "popup": "component/popup.html",
+    "widgets": [
+        {
+            "id": 1,
+            "name": "register",
+            "label": "register",
+            "template": "widget/form-login.html",
+            "isVisible": true,
+            "actions": [
+                {
+                    "label":"voltar",
+                    "isVisible": true,
+                    "showOnForm": true,
+                    "showOnList": true,
+                    "showAsAction": "back",
+                    "events": [
+                        {
+                            "id": 1,
+                            "name": "ActionEvent",
+                            "code": "RegisterController.back();"
+                        }
+                    ]
+                },
+                {
+                    "label": "cadastrar",
+                    "isVisible": true,
+                    "showOnForm": true,
+                    "showOnList": true,
+                    "showAsAction":"never",
+                    "events": [
+                        {
+                            "id": 1,
+                            "name": "ActionEvent",
+                            "code": "RegisterController.register(args.row);"
+                        }
+                    ]
+                }
+            ],
+            "events": [
+                {
+                    "id": 1,
+                    "name": "WidgetOnEnter",
+                    "code": "args.owner.newRow(); args.owner.moveToFirst();"
+                }
+            ],
+            "dataSource":{},
+            "fields": [
+                {
+                    "id": 2,
+                    "name": "nickname",
+                    "class": 12,
+                    "placeholder": "apelido",
+                    "isReadOnly": false,
+                    "isVisible": true,
+                    "isVisibleForm": true,
+                    "isVisibleGrid": false,
+                    "newLine": false,
+                    "sameLine": true,
+                    "defaultValue": null,
+                    "template": "field/text.html",
+                    "events": [],
+                    "maxlength": 30
+                },
+                {
+                    "id": 3,
+                    "name": "email",
+                    "class": 12,
+                    "placeholder": "e-mail",
+                    "isReadOnly": false,
+                    "isVisible": true,
+                    "isVisibleForm": true,
+                    "isVisibleGrid": false,
+                    "newLine": false,
+                    "sameLine": true,
+                    "defaultValue": null,
+                    "template": "field/text.html",
+                    "events": [],
+                    "maxlength": 30
+                },
+                {
+                    "id": 4,
+                    "name": "password",
+                    "class": 12,
+                    "placeholder": "senha",
+                    "isReadOnly": false,
+                    "isVisible": true,
+                    "isVisibleForm": true,
+                    "isVisibleGrid": false,
+                    "newLine": false,
+                    "sameLine": true,
+                    "defaultValue": null,
+                    "template": "field/password.html",
+                    "events": [
+                    ]
+                }
+            ]
+        }
+    ]
+}

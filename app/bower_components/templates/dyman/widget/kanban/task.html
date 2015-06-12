@@ -1,0 +1,10 @@
+<div zh-kanban-task ng-click="taskClick()">
+	<span class="kanban-task-label kanban-handle" data-ng-bind="item.label"></span>
+	<span class="kanban-task-photo">
+	  <img data-ng-src="{{ item.photo }}">
+	</span>
+	<span class="kanban-task-desc" data-ng-bind="item.description"></span>
+	<span class="kanban-task-due-date" data-ng-if="item['due-date']">
+	  Entrega: <span data-ng-bind="formatDueDate(item['due-date'])"></span>
+	</span>
+</div>

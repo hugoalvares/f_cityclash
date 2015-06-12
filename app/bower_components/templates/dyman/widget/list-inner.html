@@ -1,0 +1,56 @@
+<div zh-scroller class="container" ng-controller="ListController as controller">
+    <div class="zh-container-search zh-custom-search" data-ng-show="!controller.widget.hideSearchField">
+      <div class="zh-input-search-container">
+        <input class="zh-input-search" type="text" placeholder="Pesquisar" ng-model="searchList">
+      </div>
+    </div>
+
+	<div zh-scroller zh-infinity-scroll="{{searchList}}" class="container zh-list-container" data-ng-class="{'searchOpened': searchOpened}">
+		<ul zh-widget-events
+			class="zh-template-list" data-ng-class="{'with-search': !controller.widget.hideSearchField}">
+			<li id="pullUp">
+				<div class="row">
+					<div class="col-xs-12">
+						<ul class="zh-loading">
+							<li>
+								<i class="zh-loading-icon"></i>
+								<p ng-bind="'atualizando...'|i18n:words:lang"></p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</li>
+			<li data-ng-if="searchList && filtered.length == 0">
+				<div class="row">
+					<div class="col-xs-12">
+						<p class="text-center zh-text-search-not-find" data-ng-bind="controller.widget.noMatchText || 'nenhum registro encontrado'"> </p>
+					</div>
+				</div>
+			</li>
+			<li class="zh-text-default-sans zh-inner-list-row row"
+				ng-click="openRowInnerList(row, widget);scrollTo($event);" zh-long-tap="controller.onLongTap(row)"
+				ng-repeat="row in filtered = (controller.widget.dataSource.data | filter:controller.search)"
+				data-ng-class="{'row-selected' : row.__isSelected, 'opened': controller.widget.widgets.length > 0 && controller.widget.currentRow.__index == $index}"
+				zh-post-repeat="templateManager.container.refresh()">
+				<span zh-inner-template>
+					<div ng-repeat="column in controller.widget.fields|filter: {showOnList : true}"
+						data-ng-class="{'zh-first-large' : $first}" class="zh-list-inner-field"
+						data-ng-if="column.aclIsVisible && column.isVisible">
+						<div class="col-xs-{{column.class}}">
+							<span data-ng-show="column.label" data-ng-bind="column.label|i18n:words:lang"></span>
+							<span data-ng-bind="row[column.name]|columnFormat:column" data-ng-class="{'align-right' : column.mask && column.mask.align == 'right'}"></span>
+						</div>
+					</div>
+				</span>
+	            <span data-ng-if='controller.widget.widgets.length > 0 && controller.widget.currentRow.__index == $index'>
+	                <aside data-ng-controller="GroupListController">
+	                    <div class="zh-workaround-grid-float zh-list-inner-item" ng-include src="templateManager.getTemplateDefaultFolder()+widget.template">
+	                    </div>
+	                </aside>
+	            </span>
+			</li>
+		</ul>
+	</div>
+
+	<span class="zh-search-box" zh-icon="search no-border" ng-click="toggleSearch($event);" data-ng-show="!controller.widget.hideSearchField" data-ng-class="{'listSearchClosed': !searchOpened }"></span>
+</div>

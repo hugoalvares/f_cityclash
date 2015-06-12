@@ -1,18 +1,25 @@
 package com.lovesoft.cityclash;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.util.Log;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity implements Callback {
 
+    Servidor servidor = new Servidor(new JSONObject());
+    servidor.();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        servidor.delegate = this;
+    }
+
+    public void processFinish(JSONObject joResult){
+        Log.i("result", joResult.toString());
+    }
+
+    /*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
         // abre a tela de login
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
-        /*
+
         final Button button = (Button) findViewById(R.id.btnChamaServidor);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -36,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
-        */
+
     }
 
     @Override
@@ -60,5 +67,19 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void alerta(String stMensagem) {
+        new AlertDialog.Builder(this)
+                .setTitle("Atenção")
+                .setMessage(stMensagem)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+    */
 
 }

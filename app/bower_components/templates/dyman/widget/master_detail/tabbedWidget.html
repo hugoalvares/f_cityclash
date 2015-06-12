@@ -1,0 +1,38 @@
+<section
+	ng-controller="TabbedChild"
+	class="container"
+	zh-scroller>
+
+	<header class="row row-fluid zh-header zh-custom-tabbed-widget">
+		<div
+			class="zh-tab-wrapper"
+			data-ng-init="_widgets = [widget].concat(widget.widgets);"
+			tab-widget="widget.currentWidget"
+			tab-widgets="_widgets">
+
+			<div class="zh-tab-scroller">
+				<ul>
+					<li ng-repeat="widgetChild in _widgets"
+						data-ng-if="widgetChild.aclIsVisible && widgetChild.isVisible && widgetChild.showAsTab">
+
+						<label
+							class="zh-tab-cell"
+							ng-click="widget.currentWidget = widgetChild; widgetChild.childTemplate = ($index == 0 ? widgetChild.childTemplate : widgetChild.template); widgetChild.activate();">
+
+							<a href="#"
+								ng-bind="widgetChild.label"
+								ng-class="{'active' : widgetChild == widget.currentWidget}"
+							></a>
+
+						</label>
+
+					</li>
+				</ul>
+
+				<div class="zh-tab-line"></div>
+			</div>
+		</div>
+
+	</header>
+	<section data-ng-include="templateManager.getTemplateDefaultFolder()+'widget/master_detail/tab-widget-parent.html'"></section>
+</section>

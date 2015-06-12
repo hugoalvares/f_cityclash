@@ -1,0 +1,35 @@
+<div zh-events class="">
+    <div class="col-xs-12">
+        <div class="zh-container-search">
+            <input class="zh-input-search"  type="text" placeholder="pesquisar nome" ng-model="searchList.NAME"/>
+        </div>
+    </div>
+    <label
+            class="zh-label"
+            ng-bind="field.label"
+            ng-show="field.label"
+            ></label>
+    <table class="table table-striped"
+           zh-style
+           zh-events
+           id="{{field.name}}"
+            >
+        <thead>
+            <tr>
+                <th class="zh-label col-xs-{{column.class}}" data-ng-repeat="column in field.list.columns">
+                    {{column.label}}
+                    <a href="" ng-click="widget.order = column.value; widget.reverse = false;" ng-show="column.value"> < </a>
+                    <a href="" ng-click="widget.order = column.value; widget.reverse = true;" ng-show="column.value"> > </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="item in field.dataSource.data  | filter:searchList | orderBy:widget.order:widget.reverse">
+                <td data-ng-repeat="column in field.list.columns">
+                    <a href="#" class="{{column.image}}" ng-bind="item[column.value]" ></a>
+                </td>
+            <tr>
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,59 @@
+<div
+	data-zh-events
+	data-business-events="FieldOnChange"
+	ng-show="field.isVisible">
+	<!-- Validation  -->
+	<div class="zh-validation" ng-if="widget.currentRow.$error[field.name].length>0">
+		<span class="zh-validation-error" ng-repeat="error in widget.currentRow.$error[field.name]">
+			{{error.message}}
+		</span>
+	</div>
+
+	<!-- Label -->
+	<label
+		class="zh-label"
+		ng-class="{ 'zh-required-icon': field.validations.required, 'zh-tooltip-circle': field.validations.required || field.help }"
+		ng-show="field.label"
+		ng-bind="field.label|i18n:words:lang">
+	</label>
+
+	<!-- Tooltip -->
+	<div class="zh-tooltip-arrow" ng-if="field.help"></div>
+	<div class="zh-tooltip-text"  ng-if="field.help" ng-bind-html="field.help"></div>
+
+
+	<!-- Field -->
+	<div
+		data-ng-model="fieldRow"
+		data-zh-style
+		data-zh-validate
+		data-zh-between-dates
+		class="zh-between-dates"
+
+		>
+		<div class="col-xs-6">
+			<input
+				id="{{field.name}}"
+				name="{{field.name}}"
+				class="datetime-target input-text form-input-margin-bottom zh-field-{{field.name}} col-xs-6"
+				placeholder="{{field.placeholder|i18n:words:lang}}"
+				maxlength="{{field.maxlength}}"
+				data-ng-readonly="field.readOnly || field.aclReadOnly"
+				data-ng-disabled="field.readOnly || field.aclReadOnly"
+				zh-date-time
+			>
+		</div>
+		<div class="col-xs-6">
+			<input
+				id="{{field.name}}"
+				name="{{field.name}}"
+				class="datetime-target input-text form-input-margin-bottom zh-field-{{field.name}} col-xs-6"
+				placeholder="{{field.placeholder|i18n:words:lang}}"
+				maxlength="{{field.maxlength}}"
+				data-ng-readonly="field.readOnly || field.aclReadOnly"
+				data-ng-disabled="field.readOnly || field.aclReadOnly"
+				zh-date-time
+			>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,44 @@
+<div zh-events
+  class="zh-file-upload"
+  data-ng-show="field.isVisible"
+  data-ng-if="field.aclIsVisible"
+  ng-controller="FileUploadController">
+
+  <!-- File list -->
+  <ul class="zh-file-list">
+
+    <!-- "No File Selected" -->
+    <li data-ng-if="!field.fileList.length">
+      <span class="zh-file-name"> Nenhum arquivo selecionado </span>
+    </li>
+
+    <li data-ng-repeat="file in field.fileList">
+      <span class="zh-file-name" data-ng-bind="file.name"></span>
+      <span zh-icon="trash no-border" ng-click="deselectFile(file)"></span>
+    </li>
+  </ul>
+
+  <input
+    type="file"
+    id="{{field.name}}"
+    name="{{field.name}}"
+    data-ng-model="fieldRow"
+    data-ng-bind="field.label|i18n:words:lang"
+    data-ng-readonly="field.isReadOnly()"
+    data-ng-disabled="field.isReadOnly()"
+    data-zh-style
+    data-zh-events
+    data-zh-validate
+    data-zh-file-upload
+  >
+
+  <button
+    id="{{field.name}}"
+    name="{{field.name}}"
+    class="btn btn-default btn-block form-input-margin-bottom zh-btn-type-button zh-button col-xs-4"
+    data-ng-readonly="field.isReadOnly()"
+    data-ng-disabled="field.isReadOnly()"
+    data-zh-style
+    data-zh-events
+  > Escolher Arquivo </button>
+</div>

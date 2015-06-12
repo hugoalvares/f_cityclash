@@ -1,0 +1,38 @@
+<div zh-scroller class="container" ng-if="!!templateManager.container.template">
+	<form role="form" class="zh-{{widget.name}}" zh-widget-events ng-controller="FormController">
+		<div class="form-group">
+			<!-- Field groups -->
+			<section class="zh-field-group"
+				ng-repeat="fieldGroup in widget.fieldGroups">
+
+				<!-- Field group label -->
+        <label ng-click="fieldGroup.opened = !fieldGroup.opened">
+        	<span class="zh-label zh-field-group-label"
+	        	ng-bind="fieldGroup.label"
+	        	ng-class="{ 'opened' : fieldGroup.opened && fieldGroup.collapsible, 'closed' : !fieldGroup.opened && fieldGroup.collapsible }"></span>
+        </label>
+
+				<!-- Field group rows -->
+				<div class="field-group-rows"
+			      	ng-show="fieldGroup.opened">
+
+						<div class="row"
+							ng-repeat="row in fieldGroup.rows"
+							ng-show="widget.isVisible || true">
+
+							<div
+								class="col-xs-{{field.class}} zh-field"
+								ng-repeat="field in row.fields"
+								ng-include src="templateManager.getTemplateDefaultFolder()+'field/span-field.html'"
+								data-ng-if="field.aclIsVisible"
+								ng-show="field.isVisible && field.showOnView"
+								zh-post-repeat="templateManager.container.refresh()"
+							></div>
+
+				  	</div>
+
+		      	</div>
+			</section>
+		</div>
+	</form>
+</div>

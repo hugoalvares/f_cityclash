@@ -5,12 +5,12 @@ var express = require('express')
   , app = express()
   , db = require('./database.js')
   // regras
-  , regrasGestor = require('./regras/gestor.js')
-  , regrasGestorInvestimento = require('./regras/gestorInvestimento.js')
-  , regrasInvestimento = require('./regras/investimento.js')
-  , regrasOrganizacao = require('./regras/organizacao.js')
-  , regrasTipoReceita = require('./regras/tipoReceita.js')
-  , regrasTipoReceitaInvestimento = require('./regras/tipoReceitaInvestimento.js');
+  , regrasGestor = require('./classes/gestor.js')
+  , regrasGestorInvestimento = require('./classes/gestorInvestimento.js')
+  , regrasInvestimento = require('./classes/investimento.js')
+  , regrasOrganizacao = require('./classes/organizacao.js')
+  , regrasTipoReceita = require('./classes/tipoReceita.js')
+  , regrasTipoReceitaInvestimento = require('./classes/tipoReceitaInvestimento.js');
 
 // libera acesso para o localhost
 app.use(cors());
@@ -21,26 +21,42 @@ app.use(bodyParser.json());
 
 // função chamada pelo Android (webservice)
 app.post('/', function(request, response){
+	console.log('entrada:');
 	console.log(request.body);
-	response.send(request.body);
+
+	var func = request.body.func;
+	var params = request.body.params;
+
+	if (func == "login") {
+		regrasGestor.login(params.email, params.password, function(result, data){
+			response.send({result : result, data : data});
+		});
+	}
+
+	if (func == "register") {
+		regrasGestor.cadastro(params.nickname, params.email, params.password, function(result, data){
+			response.send({result : result, data : data});
+		});
+	}
+	//response.send(request.body);
 	/*
-	if (request.query.funcao == 'cadastraOrganizacao') {
+	if (request.query.func == 'cadastraOrganizacao') {
 		regrasOrganizacao.cadastraOrganizacao(request.dados.nome, function(){
-			montaRetorno(request.funcao, null, function(retorno){
+			montaRetorno(null, function(retorno){
 				console.log(retorno);
 				response.send(retorno);
 			});
 		});
-	} else if (request.query.funcao == 'cadastraGestor') {
+	} else if (request.query.func == 'cadastraGestor') {
 		regrasOrganizacao.cadastraGestor(request.dados.nome, request.dados.email, request.dados.senha, function(){
-			montaRetorno(request.funcao, null, function(retorno){
+			montaRetorno(null, function(retorno){
 				console.log(retorno);
 				response.send(retorno);
 			});
 		});
-	} else if (request.query.funcao == 'cadastraGestor') {
+	} else if (request.query.func == 'cadastraGestor') {
 		regrasOrganizacao.buscaOrganizacoes(function(dados){
-			montaRetorno('buscaOrganizacoes', dados, function(retorno){
+			montaRetorno(dados, function(retorno){
 				console.log(retorno);
 				response.send(retorno);
 			});
@@ -49,16 +65,16 @@ app.post('/', function(request, response){
 	*/
 });
 
-function montaRetorno(funcao, dados, callback) {
+function montaRetorno(func, data, callback) {
 	var retorno = {
-		funcao : funcao,
-		data : dados
+		func : func,
+		data : data
 	};
 	callback(retorno);
 };
 
 // porta em que vai iniciar o servidor
-var porta = 80;
+var porta = 9091;
 
 // iniciando o servidor
 app.listen(porta, function(){

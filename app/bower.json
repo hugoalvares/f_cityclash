@@ -1,0 +1,17 @@
+{
+	"name": "emptyProject",
+	"version": "0.0.0",
+	"authors": ["Zeedhi Developer <developer@zeedhi.com>"],
+	"dependencies": {
+		"assets": "http://cdn.zeedhi.com/cdn/bleeding/assets.tar.gz",
+		"templates": "http://cdn.zeedhi.com/cdn/bleeding/templates.tar.gz"
+	},
+	"license": "MIT",
+	"ignore": [
+			"**/.*",
+			"node_modules",
+			"bower_components",
+			"test",
+			"tests"
+	]
+}

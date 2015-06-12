@@ -1,0 +1,15 @@
+<section  
+	class="zh-content zh-container-{{templateManager.container.name}}"
+	data-ng-controller="TabbedContainer">
+
+	<header class="row row-fluid zh-header" data-ng-show="isTabbed">
+		<label class="col-xs-6" data-ng-repeat="header in tabs" ng-click="tabClick(header)">
+			<a href="#" data-ng-bind="header" data-ng-class="{'active' : header == widget.label}"></a>
+		</label>
+	</header>
+
+	<section data-ng-if='!!widget && widget.isVisible && widget.aclIsVisible' data-ng-include="templateManager.getTemplateDefaultFolder()+getTemplate()">
+		
+	</section>
+
+</section>

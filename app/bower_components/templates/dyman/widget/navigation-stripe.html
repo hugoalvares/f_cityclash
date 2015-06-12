@@ -1,0 +1,55 @@
+<!-- Navigation stripe -->
+<aside class="container zh-stripe zh-stripe-bgcolor zh-navigation-stripe" zh-widget-events>
+	<header>
+		<form role="form" class="zh-{{widget.name}} zh-nopadding-container row-fluid" ng-controller="FormController">
+			<div class="form-group col-xs-8 col-sm-10 zh-stripe-fields">
+				<!-- Field groups -->
+				<section class="zh-field-group"
+					ng-repeat="fieldGroup in widget.fieldGroups">
+
+					<!-- Field group label -->
+					<label
+						ng-if="fieldGroup.label"
+						ng-click="fieldGroup.opened = !fieldGroup.opened">
+						<span class="zh-label zh-field-group-label"
+							ng-bind="fieldGroup.label"
+							ng-class="{ 'opened' : fieldGroup.opened && fieldGroup.collapsible, 'closed' : !fieldGroup.opened && fieldGroup.collapsible }"></span>
+					</label>
+
+					<!-- Field group rows -->
+					<div class="field-group-rows"
+						ng-show="fieldGroup.opened">
+
+							<div class="row"
+								ng-repeat="row in fieldGroup.rows"
+								data-ng-show="widget.isVisible || true"
+								data-ng-if="widget.aclIsVisible">
+
+								<div
+									class="col-xs-{{field.class}} zh-field"
+									ng-repeat="field in row.fields"
+									ng-include src="templateManager.getTemplateDefaultFolder()+field.template"
+									data-ng-show="field.isVisible && field.showOnForm"
+									data-ng-if="field.aclIsVisible"
+									zh-post-repeat="templateManager.container.refresh()"
+								></div>
+
+						</div>
+
+					</div>
+				</section>
+				<div class="row row-fluid zh-stripe-row" ng-show="widget.showRowPosition">
+					<div class="zh-field zh-label zh-small-text">
+						{{ widget.rowPositionLabel || ("Registro"|i18n:words:lang) }} {{widget.currentRow.__index+1}} {{("de"|i18n:words:lang)}} {{widget.dataSource.data.length}}
+					</div>
+				</div>
+			</div>
+			<div class="zh-stripe-nav col-xs-4 col-sm-2">
+				<div class="align-right">
+					<button zh-icon="icon-white back" zh-touchstart="widget.moveToPrev()"></button>
+					<button zh-icon="icon-white next" zh-touchstart="widget.moveToNext()"></button>
+				</div>
+			</div>
+		</form>
+	</header>
+</aside>

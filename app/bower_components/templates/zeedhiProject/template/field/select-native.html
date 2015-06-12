@@ -1,0 +1,14 @@
+<div class="" ng-show="field.isVisible">
+    <label class="zh-label" ng-bind="field.label"></label>
+    <select
+            zh-style
+            zh-events
+            name="{{field.name}}"
+            id="{{field.name}}"
+            ng-model="fieldRow"
+            class='show input-text'
+            >
+        <option></option>
+        <option ng-repeat="item in field.dataSource.data" value="{{item[field.valueField]}}">{{item[field.descriptionField]}}</option>
+    </select>
+</div>

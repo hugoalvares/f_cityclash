@@ -1,0 +1,29 @@
+{
+    "zeedhi_project": {
+        "name": "cityClash",
+        "showHistoryLastItems": false,
+        "label": "City Clash",
+        "showMenu": true,
+        "showHeader": false,
+        "showFooter": true,
+        "menuTemplate": "menu/menu.html",
+        "mainWindow": "index",
+        "logLevel": "DEBUG",
+        "menuChildTemplate": "menu/menu_child.html",
+        "groupMenu": [
+            {
+                "label" : "",
+                "name" : "default",
+                "isVisible" : true,
+                "menus" : [
+                    {
+                        "label" : "logoff",
+                        "windowName" : "index",
+                        "icon" : "logoff icon-white",
+                        "isVisible": true
+                    }
+                ]
+            }
+        ]
+    }
+}

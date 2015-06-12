@@ -33,8 +33,14 @@ public class Login extends ActionBarActivity {
                     EditText edtSenha = (EditText)findViewById(R.id.edtSenha);
                     String stSenha = edtSenha.getText().toString();
 
-                    // chama função de login
-                    Regras.login(stEmail, stSenha);
+                    if (stEmail.equals("")) {
+                        alerta("Informe o e-mail.");
+                    } else if (stSenha.equals("")) {
+                        alerta("Informe a senha.");
+                    } else {
+                        // chama função de login
+                        Regras.login(Login.this, stEmail, stSenha);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -46,8 +52,7 @@ public class Login extends ActionBarActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    // abre a tela de login
-                    Intent intent = new Intent(this, Cadastro.class);
+                    Intent intent = new Intent(Login.this, Cadastro.class);
                     startActivity(intent);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -78,4 +83,16 @@ public class Login extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void alerta(String stMensagem) {
+        new AlertDialog.Builder(this)
+                .setTitle("Atenção")
+                .setMessage(stMensagem)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 }

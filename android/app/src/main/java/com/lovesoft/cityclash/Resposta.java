@@ -1,9 +1,8 @@
 package com.lovesoft.cityclash;
 
+import android.app.Activity;
 import android.util.Log;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -11,44 +10,40 @@ import org.json.JSONObject;
  */
 public class Resposta {
 
-    public static void trataRetorno(JSONObject joRetorno) {
+    public static void trataRetorno(Activity coActivity, JSONObject joRetorno) {
         try {
-            String funcao = joRetorno.getString("funcao");
-            JSONArray dados = joRetorno.getJSONArray("data");
-
+            String stFuncao = joRetorno.getString("funcao");
+            JSONArray jaDados = joRetorno.getJSONArray("data");
+            //coActivity.get;
             // escrever funções abaixo
-            if (funcao == "buscaOrganizacoes") {
-                buscaOrganizacoes(dados);
-            } else if (funcao == "cadastraOrganizacao") {
-                cadastraOrganizacao();
-            } else if (funcao == "creditaGestor") {
-                creditaGestor();
-            } else if (funcao == "login") {
-                login(dados);
+            if (stFuncao.equals("login")) {
+                login(jaDados);
+            } else if (stFuncao.equals("cadastro")) {
+                cadastro();
             }
-        } catch (Exception e) {
-            Log.i("debugger", "dado não encontrado");
-        }
-    }
-
-    private static void buscaOrganizacoes(JSONArray dados) {
-        try {
-            Log.i("debugger", dados.getJSONObject(0).getString("nome"));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void cadastraOrganizacao() {
-        // deu certo
+    private static void login(JSONArray jaDados) {
+        try {
+            if (jaDados.length() > 0) {
+
+            } else {
+                Log.w("login", "gestor não encontrado");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private static void creditaGestor() {
-        // deu certo
-    }
-
-    private static void login() {
-
+    private static void cadastro() {
+        try {
+            // cadastro realizado com sucesso
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

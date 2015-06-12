@@ -1,0 +1,16 @@
+<img src="{{fieldRow ||  field.imagePlaceholder  || '/images/placeholder.jpg'}}" class="img-thumbnail img-preview">
+<div>
+  <button
+		type="button"
+		id="{{field.name}}"
+		name="{{field.name}}"
+		data-ng-model="fieldRow"
+		data-ng-bind="field.label|i18n:words:lang"
+		data-ng-readonly="field.isReadOnly()"
+		data-ng-disabled="field.isReadOnly()"
+		data-zh-style
+		data-zh-events
+		data-ng-click="templateManager.fileToUpload = field; startUploadFile()"
+		class="btn btn-default btn-block form-input-margin-bottom zh-btn-type-button"
+	></button>
+</div>

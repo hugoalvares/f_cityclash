@@ -1,0 +1,14 @@
+<div class="" zh-events ng-show="field.isVisible">
+    <label
+            class="zh-label"
+            ng-bind="field.label"
+            ng-show="field.label"></label>
+    <input
+            type="number"
+            name="name"
+            zh-mask
+            class="show input-text"
+            ng-model="fieldRow"
+            ng-disabled="field.readOnly"
+            placeholder="{{field.placeholder|i18n:words:lang}}"  />
+</div>

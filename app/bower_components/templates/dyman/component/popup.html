@@ -1,0 +1,29 @@
+<span ng-controller="PopupController as pcontroller">
+	<div class="popup-overlay"  ng-show="!widget.popupNoBlock"></div>
+	<section class="popup-container" ng-class="{popupNoBlock: widget.popupNoBlock}" >
+	    <section data-ng-if='popupOpen'>
+	    	<header class="zh-business-color-popup-header">
+		    	<div class="popup-title" ng-bind-html="widget.label|i18n:words:lang"></div>
+				<div class="zh-popup-right" ng-show="(widget.actions | filter:{showAsAction : 'popup'}).length == 1">
+					<ul>
+						<li ng-repeat="action in widget.actions | filter:{showAsAction : 'popup'}"
+							data-zh-touchstart="actionClick(action, action.widget)"
+							data-ng-if="action.aclIsVisible"
+							data-ng-show="action.isVisible">
+							<a>
+								<span class="zh-popup-title-sprit"
+									ng-bind="action.label|i18n:words:lang"
+									ng-class="{ 'zh-font-color-main': !widget.popupNoBlock }"
+								></span>
+								<span ng-if="action.icon" zh-icon="{{ getIconClass(action, widget); }}"></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</header>
+	        <section class="popup-content" ng-show="!!widget.template" ng-include src="templateManager.getTemplateDefaultFolder()+widget.template">
+	        </section>
+		</section>
+	  <div data-ng-if="popupOpen && !!!widget.popupNoBlock" data-ng-include src="templateManager.getTemplateDefaultFolder()+'component/footer.html'"></div>
+	</section>
+</span>

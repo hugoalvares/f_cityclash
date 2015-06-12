@@ -1,5 +1,6 @@
 package com.lovesoft.cityclash;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -22,18 +23,24 @@ import static com.lovesoft.cityclash.Resposta.trataRetorno;
 */
 public class Servidor extends AsyncTask<Void, Void, Void> {
 
-    String stUrl;
+    private static final String stUrl = "http://192.168.43.62:9091";
     JSONObject joParams;
+    public Callback delegate = null;
 
-    public Servidor(String stUrl, JSONObject joParams) {
+    public Servidor(JSONObject joParams) {
         super();
-        this.stUrl = stUrl;
         this.joParams = joParams;
     }
 
     @Override
     protected Void doInBackground(Void... params) {
         serverRequest(stUrl, joParams);
+        return null;
+    }
+
+    @Override
+    protected Void onPostExecute(JSONObject joResult) {
+        delegate.processFinish(joResult);
         return null;
     }
 
@@ -55,7 +62,7 @@ public class Servidor extends AsyncTask<Void, Void, Void> {
             // busca o retorno da requisição
             InputStream inputStream = httpResponse.getEntity().getContent();
             // converte retorno da requisição para string e retorna
-            trataRetorno(new JSONObject(convertInputStreamToString(inputStream)));
+            //trataRetorno(this.coActivity, new JSONObject(convertInputStreamToString(inputStream)));
         } catch (Exception e) {
             e.printStackTrace();
         }

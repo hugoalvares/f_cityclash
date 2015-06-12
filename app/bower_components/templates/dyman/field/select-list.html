@@ -1,0 +1,25 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1 class="zh-healingOne zh-spacing-title-select-list" ng-bind="field.label|i18n:words:lang"></h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="zh-container-search">
+				<input class="zh-input-search" type="text" placeholder="{{'Pesquisar'|i18n:words:lang}}" ng-model="selectListSearch"
+				ng-keyup="search(selectListSearch, field)"/>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<ul zh-field-events	class="zh-template-list">
+				<li ng-click="templateManager.container.setSelected(row, field)"
+					ng-repeat="row in field.dataSource.data">
+						<a href="#" data-ng-bind="row[field.descriptionField]"></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

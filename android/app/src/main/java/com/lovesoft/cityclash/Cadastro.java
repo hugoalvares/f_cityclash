@@ -1,5 +1,7 @@
 package com.lovesoft.cityclash;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -32,8 +34,9 @@ public class Cadastro extends ActionBarActivity {
                     EditText edtSenha2 = (EditText)findViewById(R.id.edtSenha2);
                     String stSenha2 = edtSenha2.getText().toString();
 
-                    // chama função de cadastro
-                    Regras.cadastro(stEmail, stApelido, stSenha1, stSenha2);
+                    if (validaFormulario(stEmail, stApelido, stSenha1, stSenha2)) {
+                        Regras.cadastro(stEmail, stApelido, stSenha1);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -62,5 +65,36 @@ public class Cadastro extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean validaFormulario(String stEmail, String stApelido, String stSenha1, String stSenha2) {
+        boolean boRetorno = false;
+        if (stEmail.equals("")) {
+            alerta("Informe o e-mail.");
+        } else if (stApelido.equals("")) {
+            alerta("Informe o apelido.");
+        } else if (stSenha1.equals("")) {
+            alerta("Informe a senha.");
+        } else if (stSenha2.equals("")) {
+            alerta("Informe a senha.");
+        } else if (!stSenha1.equals(stSenha2)) {
+            alerta("As senhas digitadas não conferem.");
+        } else {
+            boRetorno = true;
+        }
+        return boRetorno;
+    }
+
+    private void alerta(String stMensagem) {
+        new AlertDialog.Builder(this)
+                .setTitle("Atenção")
+                .setMessage(stMensagem)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }

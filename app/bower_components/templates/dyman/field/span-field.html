@@ -1,0 +1,44 @@
+<!-- ABOUT THIS:
+-	The span-field.html is used on form widgets in the view mode.
+-	It is included and shows a different visualization for
+-->
+
+<div zh-events
+	ng-show="field.isVisible"
+	ng-controller="DecodeValueField as decode">
+
+	<!-- Label for general fields -->
+	<label
+		class="zh-label"
+		ng-bind="field.label|i18n:words:lang"
+		ng-if="!isCheckbox(field) && !isButton(field)"
+	></label>
+
+	<!-- Value for general fields -->
+	<p
+		class="zh-field-value"
+		ng-bind="decode.model(field, fieldRow)"
+		ng-if="!isCheckbox(field)"
+	></p>
+
+	<!-- Button field -->
+	<button
+		type="button"
+		class="btn btn-default btn-block form-input-margin-bottom zh-btn-type-button zh-button"
+		ng-bind="field.label|i18n:words:lang"
+		ng-include="templateManager.getTemplateDefaultFolder()+field.template"
+		ng-if="isButton(field)"
+	></button>
+
+	<!-- Checkbox field -->
+	<div ng-if="isCheckbox(field)" class="zh-checkbox" zh-events>
+		<input type="checkbox" ng-checked="field.checked" readonly disabled>
+		<label class="zh-box-label">
+			<div class="zh-box">
+				<span zh-icon="checked no-border" ng-show="fieldRow == field.valueToTrue"></span>
+			</div>
+			<span ng-bind="field.label"></span>
+		</label>
+	</div>
+
+</div>

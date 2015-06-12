@@ -1,0 +1,72 @@
+<div zh-scroller class="container" ng-controller="ListController as controller">
+    <div class="zh-container-search zh-custom-search" data-ng-show="!controller.widget.hideSearchField">
+      <div class="zh-input-search-container">
+        <input class="zh-input-search" type="text" placeholder="{{'Pesquisar'|i18n:words:lang}}" ng-model="searchList">
+      </div>
+    </div>
+	<div zh-scroller zh-infinity-scroll="{{searchList}}" class="container zh-list-container" data-ng-class="{'searchOpened': searchOpened}">
+		<ul zh-widget-events
+			class="zh-template-list" data-ng-class="{'with-search': !controller.widget.hideSearchField}">
+			<li id="pullUp">
+				<div class="row">
+					<div class="col-xs-12">
+						<ul class="zh-loading">
+							<li>
+								<i class="zh-loading-icon"></i>
+								<p ng-bind="'atualizando...'|i18n:words:lang"></p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</li>
+			<li data-ng-if="filtered.length == 0">
+				<div class="row">
+					<div class="col-xs-12">
+						<p data-ng-if="!searchList"
+              class="text-center zh-text-search-not-found"
+              data-ng-bind="widget.noMatchText || ('Não há registros.'|i18n:words:lang) "
+            ></p>
+            <p data-ng-if="searchList"
+              class="text-center zh-text-search-not-found"
+              data-ng-bind="widget.searchNoMatchText || ('Nenhum registro encontrado.'|i18n:words:lang) "
+            ></p>
+					</div>
+				</div>
+				<div class="row" data-ng-if="filtered.length == 0 && widget.showAddButtonAs == 'button'"
+          data-zh-touchstart="widget.onAdd()">
+          <div class="col-xs-12">
+            <p class="text-center zh-text-search-not-found zh-add-when-empty">
+              <span zh-icon="plus"></span>
+              <span ng-bind="widget.addButtonText || ('Adicionar um registro'|i18n:words:lang)"></span>
+            </p>
+          </div>
+        </div>
+			</li>
+			<li class="zh-text-default-sans zh-list-item-label"
+				ng-repeat="row in filtered = (controller.widget.dataSource.data || [] | filter:controller.search)"
+				data-ng-class="{'row-selected' : row.__isSelected, 'list-checkbox': controller.widget.showCheckbox, 'row-editing': $index == widget.currentRow.__index}"
+				zh-post-repeat="templateManager.container.refresh()">
+				<!-- Checkbox -->
+				<div ng-if="controller.widget.showCheckbox" class="zh-checkbox zh-list-item-checkbox">
+				  <input type="checkbox" id="check-list-{{$index}}" ng-change='controller.toggle(row)' data-ng-model="row.__isSelected">
+				  <label for="check-list-{{$index}}" class="zh-box-label">
+				    <div class="zh-box">
+				      <span zh-icon="no-border checked"  data-ng-show="row.__isSelected"></span>
+				    </div>
+				  </label>
+				</div>
+				<!-- List item  -->
+				<div ng-repeat="column in controller.widget.fields|filter: {showOnList : true}"
+					data-ng-class="{'zh-first-large' : $first}" class="row"
+					data-ng-if="column.aclIsVisible && column.isVisible">
+					<div class="col-xs-{{column.class}}" ng-click="openRow(row, widget); updateSwipeTipPos($event)" zh-long-tap="controller.onLongTap(row);">
+						<span data-ng-show="column.label" data-ng-bind="column.label|i18n:words:lang"></span>
+						<span data-ng-bind="row[column.name]|columnFormat:column" ng-class="{'zh-desc-small' : $odd}"></span>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<span class="zh-search-box" zh-icon="search no-border" ng-click="toggleSearch($event);" data-ng-show="!controller.widget.hideSearchField" data-ng-class="{'listSearchClosed': !searchOpened }"></span>
+</div>

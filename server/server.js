@@ -39,6 +39,48 @@ app.post('/', function(request, response){
 		});
 	}
 
+	if (func == "getInvestments") {
+		regrasInvestimento.buscaInvestimentos(function(result, data){
+			response.send({result : result, data : data});
+		});
+	}
+
+	if (func == "getManagerInvestments") {
+		regrasGestorInvestimento.buscaInvestimentos(function(result, data){
+			response.send({result : result, data : data});
+		});
+	}
+
+	if (func == "createInvestment") {
+		regrasGestorInvestimento.criaInvestimento(params.managerCode, params.investmentCode, params.lat, params.lng, function(result, data){
+			response.send({result : result, data : data});
+		});
+	}
+
+	if (func == "createOrganization") {
+		regrasOrganizacao.criaOrganizacao(params.name, params.director, function(result, data){
+			response.send({result : result, data : data});
+		});
+	}
+
+	if (func == "getAllOrganizations") {
+		regrasOrganizacao.buscaOrganizacoes(function(result, data){
+			response.send({result : result, data : data});
+		});
+	}
+
+	if (func == "getMyOrganizations") {
+		regrasOrganizacao.buscaMinhasOrganizacoes(params.managerCode, function(result, data){
+			response.send({result : result, data : data});
+		});
+	}
+
+	if (func == "getMembers") {
+		regrasOrganizacao.buscaMembros(function(result, data){
+			response.send({result : result, data : data});
+		});
+	}	
+
 	/*
 	if (request.query.func == 'cadastraOrganizacao') {
 		regrasOrganizacao.cadastraOrganizacao(request.dados.nome, function(){

@@ -1,0 +1,14 @@
+insert into categoria
+(nome)
+values
+('comercial')
+
+insert into investimento
+(nome, preco, tempoconstrucao, manutencao, rendimento, categoria_codigo)
+values
+('hotel', 100, 60, 30, 50, 1)
+
+insert into investimento
+(nome, preco, tempoconstrucao, manutencao, rendimento, categoria_codigo)
+values
+('restaurante', 100, 60, 30, 50, 1)
